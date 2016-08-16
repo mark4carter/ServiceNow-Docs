@@ -9,7 +9,7 @@ Welcome to ServiceNow Documentation's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    CMS/index
 
