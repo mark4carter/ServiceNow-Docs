@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Reference Qualifiers &mdash; ServiceNow Documentation 0.01 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
+        <link rel="next" title="REST Message v2" href="../REST_Messages/index.html"/>
+        <link rel="prev" title="Project Portfolio Suite" href="../Project_Portfolio_Suite/index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ServiceNow Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contract_Management/index.html">Contract Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Portfolio_Suite/index.html">Project Portfolio Suite</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reference Qualifiers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-dynamic-qualifier">Creating a Dynamic Qualifier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-script-include">The Script Include</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-dyanmic-filter-option">The Dyanmic Filter Option</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ServiceNow Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Reference Qualifiers</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Reference_Qualifiers/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reference-qualifiers">
+<h1>Reference Qualifiers<a class="headerlink" href="#reference-qualifiers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-a-dynamic-qualifier">
+<h2>Creating a Dynamic Qualifier<a class="headerlink" href="#creating-a-dynamic-qualifier" title="Permalink to this headline">¶</a></h2>
+<p>I decided to create a catalog item to request a parking space.  One feature
+I wanted was to only show parking spots depending on which type of spot
+you want to reserve (ie. VIP, Motorcycle, Normal).</p>
+<p>To accomplish that requirement, I decided to go with a dynamic qualifier that
+changes depending on type selected.</p>
+<div class="section" id="the-script-include">
+<h3>The Script Include<a class="headerlink" href="#the-script-include" title="Permalink to this headline">¶</a></h3>
+<p>This is probably up for debate, but I decided to keep the same object format for
+my script include using Class.create() and .prototype.</p>
+<div class="myownstyle admonition">
+<p class="first admonition-title">Script Include Fields</p>
+<blockquote class="last">
+<div><div class="line-block">
+<div class="line">Name : <strong>parkingByParkingType</strong></div>
+<div class="line">Client callable : <strong>True</strong></div>
+</div>
+</div></blockquote>
+</div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">parkingByParkingType</span> <span class="o">=</span> <span class="nx">Class</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+<span class="nx">parkingByParkingType</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">},</span>
+
+        <span class="nx">getSpots</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+                <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+
+                <span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;u_parking_spot&quot;</span><span class="p">);</span>
+                        <span class="nx">res</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s2">&quot;u_assigned&quot;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+                        <span class="nx">res</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s2">&quot;u_type&quot;</span><span class="p">,</span> <span class="nx">current</span><span class="p">.</span><span class="nx">variables</span><span class="p">.</span><span class="nx">parking_type</span><span class="p">);</span>
+                        <span class="nx">res</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
+
+                <span class="k">while</span> <span class="p">(</span> <span class="nx">res</span><span class="p">.</span><span class="nx">next</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">sys_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+                <span class="p">}</span>
+
+                <span class="kd">var</span> <span class="nx">au</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayUtil</span><span class="p">();</span>
+
+                <span class="k">return</span> <span class="nx">au</span><span class="p">.</span><span class="nx">unique</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+        <span class="p">},</span>
+
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;parkingByParkingType&#39;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The function of interest is the .getSpots() function.  It&#8217;s a basic query in the
+u_parking_spot table, but with a Dynamic Query we have acccess to <em>current</em> which
+we can use to add to query.  In this example we&#8217;re using the parking_type variable,
+which is a selection.</p>
+</div>
+<div class="section" id="the-dyanmic-filter-option">
+<h3>The Dyanmic Filter Option<a class="headerlink" href="#the-dyanmic-filter-option" title="Permalink to this headline">¶</a></h3>
+<p>Ref: <a class="reference external" href="https://www.packtpub.com/mapt/book/Networking%20and%20Servers/9781782174219/02/ch02lvl1sec26/Scripting%20Reference%20Qualifiers">https://www.packtpub.com/mapt/book/Networking%20and%20Servers/9781782174219/02/ch02lvl1sec26/Scripting%20Reference%20Qualifiers</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../REST_Messages/index.html" class="btn btn-neutral float-right" title="REST Message v2" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Project_Portfolio_Suite/index.html" class="btn btn-neutral" title="Project Portfolio Suite" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Carter.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.01',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

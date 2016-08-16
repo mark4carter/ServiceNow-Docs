@@ -1,0 +1,41 @@
+.. ServiceNow Documentation documentation master file, created by
+   sphinx-quickstart on Tue Aug  2 08:42:56 2016.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+REST Message v2
+##########################
+
+
+External Cart Orders
+********************
+
+Sending the REST Message
+========================
+
+* From within another ServiceNow Instance
+
+    This can be run however you would want, but I've only tested
+    this using a background script.  I don't see why it would
+    not work otherwise.
+
+
+.. code-block:: javascript
+
+    var request = new sn_ws.RESTMessageV2();
+    request.setEndpoint('https://devXXXXX.service-now.com/api/now/table/u_cart_order');
+    request.setHttpMethod('POST');
+
+    //Eg. UserName="admin", Password="admin" for this code sample.
+    var user = 'admin';
+    var password = 'admin';
+
+    request.setBasicAuth(user,password);
+    request.setRequestHeader("Accept","application/json");
+    request.setRequestHeader('Content-Type','application/json');
+    request.setRequestBody("{\"u_catolog_item\":\"e46305bdc0a8010a00645e608031eb0f\"," +
+                                "\"u_variables\":\"cpu_speed=3000," +
+                                "\""
+                                "replacement=Yes\"}");
+    var response = request.execute();
+    gs.log(response.getBody());
