@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Time Card Modifications &mdash; ServiceNow Documentation 0.01 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
+        <link rel="next" title="Working With Variable Sets" href="../Variable_Sets/index.html"/>
+        <link rel="prev" title="Slack Questions" href="../Slack_Questions/index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ServiceNow Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contract_Management/index.html">Contract Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Portfolio_Suite/index.html">Project Portfolio Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Time Card Modifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#generate-time-cards-based-on-resource-allocations">Generate Time Cards based on Resource Allocations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#goal">Goal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#script-include">Script Include</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ServiceNow Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Time Card Modifications</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Time_Cards/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="time-card-modifications">
+<h1>Time Card Modifications<a class="headerlink" href="#time-card-modifications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generate-time-cards-based-on-resource-allocations">
+<h2>Generate Time Cards based on Resource Allocations<a class="headerlink" href="#generate-time-cards-based-on-resource-allocations" title="Permalink to this headline">¶</a></h2>
+<p>Currently timecards are only generated for the table planned_task and only for the current week</p>
+<div class="section" id="goal">
+<h3>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Generate timecards when the current user is assigned as a resource allocation</li>
+<li>Generate timecards for upcoming weeks (not just the current week)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="script-include">
+<h3>Script Include<a class="headerlink" href="#script-include" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The only script we need to edit is the <strong>TimeCardAjax</strong> script include.  Since this is OOB, it&#8217;s best to insert-and-stay
+then mark the original as inactive.</p>
+<p>The only OOB function we will be editing is <strong>ajaxFunction_generateTaskCards()</strong>, the rest we will be creating
+ourselves.</p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">ajaxFunction_generateTaskCards</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">//get request info</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">weekStart</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getWeekStart</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getParameter</span><span class="p">(</span><span class="s1">&#39;sysparm_user&#39;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">weekEnd</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getWeekEnd</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">newCards</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">//list of cards created</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">existingCards</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getExistingCards</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">plannedTasks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getPlannedTasks</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">_generateMissingCards</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">plannedTasks</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">_generateMissingCards</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">);</span>
+
+  <span class="c1">//added two functions to be run for Resource Allocations</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">resourceAllocations</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getResourceAllocations</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">_generateMissingAllocations</span><span class="p">();</span>
+
+   <span class="k">this</span><span class="p">.</span><span class="nx">_buildResult</span><span class="p">();</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>This is the function that gets run initially, when TimecardAjax is called.  What I added were two lines between <em>this._generateMissingCards(this.plannedTasks)*</em>
+and <strong>this._buildResult();</strong>.</p>
+<p>Both functions should be self explanatory.  The <strong>._getResourceAllocation()</strong> grabs all resource allocations for the user
+and <strong>._generateMissingAllocations()</strong> will generate timecards if there are no timecards associated.</p>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Variable_Sets/index.html" class="btn btn-neutral float-right" title="Working With Variable Sets" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Slack_Questions/index.html" class="btn btn-neutral" title="Slack Questions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Carter.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.01',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

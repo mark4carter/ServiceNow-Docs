@@ -70,3 +70,38 @@ Contract Substates
 
 Creating Contracts
 ~~~~~~~~~~~~~~~~~~~~
+
+Obtaining Contract Approval
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Once in **Draft** state a contract can be sent for approval to only one approver.  The approver name cannot be changed.
+
+Contract Management Tutorial
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview Module
+:::::::::::::::::
+
+OOB shows Active Contracts by Vendor and shows
+many differen drill downs
+
+Most selections are self-explanatory
+
+Data shown on contract record
+::::::::::::::::::::::::::::::::::
+
+Quick Buttons include: Update, Adjust, Cancel Contract, Extend, Renew
+
+Most all fields are locked down and must be changed through the buttons
+and they cannot be changed without approval.
+
+Contract Rate Cards
+:::::::::::::::::::::
+
+Every night the scheduler will run to check and will automtically produce
+an expense line
+
+Create New Contract Type
+:::::::::::::::::::::::::
+
+Go to Product Models -> Contract Models -> New

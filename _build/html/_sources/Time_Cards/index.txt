@@ -41,28 +41,8 @@ Script Include
            this._buildResult();
         },
 
-  This is the function that gets run initially, when TimecardAjax is called.  What I added were two lines between **this._generateMissingCards(this.plannedTasks)**
+  This is the function that gets run initially, when TimecardAjax is called.  What I added were two lines between *this._generateMissingCards(this.plannedTasks)**
   and **this._buildResult();**.  
 
   Both functions should be self explanatory.  The **._getResourceAllocation()** grabs all resource allocations for the user
   and **._generateMissingAllocations()** will generate timecards if there are no timecards associated.
-
-Unit Tests
-------------
-
-  .. code-block:: javascript
-
-    var alloc = new GlideRecord("resource_allocation");
-    alloc.user = "0ac0a7f7db20220003ee793ebf961970";
-    var date = new GlideDate();
-    date.setValue('2016-11-05');
-    alloc.start_date = date;
-    var date2 = new GlideDate();
-    date2.setValue('2016-11-23');
-    alloc.end_date = date2;
-    alloc.requested_hours = "30";
-    alloc.task = "48b1d30ddb95a20003ee793ebf961942"
-    alloc.resource_plan = "e3bc5091db19a20003ee793ebf961943"
-    var test = alloc.insert();
-    gs.log(test);
-
