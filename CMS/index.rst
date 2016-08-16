@@ -17,12 +17,12 @@ as first expected.  The value is actually a field in a record under Service Cata
 In this particular task, I had to inside one more step deeper into the Service Catalog record and choose
 the specific site.
 
-.. image:: img/sc_list.jpg
+.. image:: img/sc_list.JPG
       :width: 100%
 
 Then within I changed the fields CMS 'Continue Shopping' page
 
-.. image:: img/shop_field.jpg
+.. image:: img/shop_field.JPG
       :width: 75%
 
 Ref: https://community.servicenow.com/community/service-management/service-catalog/blog/2015/05/01/how-to-get-continue-shopping-buttons-to-work-in-your-service-catalog
