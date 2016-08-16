@@ -23,6 +23,8 @@ Contents:
 
    Slack_Questions/index
 
+   Time_Cards/index
+
    Variable_Sets/index
 
 
