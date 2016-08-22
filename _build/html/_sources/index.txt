@@ -21,6 +21,8 @@ Contents:
 
    REST_Messages/index
 
+   Service_Portal/index
+
    Slack_Questions/index
 
    Time_Cards/index

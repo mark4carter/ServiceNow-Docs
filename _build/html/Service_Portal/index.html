@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Service Portal &mdash; ServiceNow Documentation 0.01 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
+        <link rel="next" title="Slack Questions" href="../Slack_Questions/index.html"/>
+        <link rel="prev" title="REST Message v2" href="../REST_Messages/index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ServiceNow Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contract_Management/index.html">Contract Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Portfolio_Suite/index.html">Project Portfolio Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Service Portal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-how-server-script-works">Understanding How Server Script Works</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-client-can-send-data-also">The Client can send Data also</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#processing-the-input-sent-from-client">Processing the input sent from client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ServiceNow Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Service Portal</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Service_Portal/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="service-portal">
+<h1>Service Portal<a class="headerlink" href="#service-portal" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This will discuss using Angular and coding widgets to
+create a Service Portal with as much, if not more, features
+as the Content Management System</p>
+</div>
+<div class="section" id="understanding-how-server-script-works">
+<h2>Understanding How Server Script Works<a class="headerlink" href="#understanding-how-server-script-works" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://docs.servicenow.com/bundle/helsinki-servicenow-platform/page/build/service-portal/concept/c_Scripting.html"><img alt="../_images/Server-ClientGlobalScripts.jpg" src="../_images/Server-ClientGlobalScripts.jpg" style="width: 70%;" /></a>
+<p>The Flow of Data from <a class="reference external" href="https://docs.servicenow.com/bundle/helsinki-servicenow-platform/page/build/service-portal/concept/c_Scripting.html/">ServiceNow Docs</a></p>
+<p>The Server Script on a widget is executed <em>onLoad</em> and can be used to transfer
+a <strong>data</strong> object from the server to the client.  On the client, this data object
+is very important for fleshing out your portal page.</p>
+<p>Let&#8217;s say you want a widget of vip users and their picture.  The server would send
+the data with that information and the client receives that data object and then
+displays it the way you desire.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="kd">var</span> <span class="nx">userGR</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;sys_user&quot;</span><span class="p">);</span>
+  <span class="nx">userGR</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s2">&quot;vip&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  <span class="nx">userGR</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="nx">userGR</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nx">data</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">userGR</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Once the code reaches the bottom the data object will be sent.  So now you have an
+array of VIP names that you can use.</p>
+<div class="section" id="the-client-can-send-data-also">
+<h3>The Client can send Data also<a class="headerlink" href="#the-client-can-send-data-also" title="Permalink to this headline">¶</a></h3>
+<p>So let&#8217;s say you want to give users the ability to change what kind of users they
+want to see.  For example, the user chooses to query for, let&#8217;s say, all ITIL users.</p>
+<p>On the client side code, create an object literal called <strong>input</strong> and fill in the information the server
+would need.  For this example, we can send the string &#8220;itil&#8221; in the input object.  Once
+we are ready we use <em>server.update()</em> to send the input object to the server.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="nx">$scope</span><span class="p">.</span><span class="nx">onItilButtonClick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">input</span><span class="p">.</span><span class="nx">button</span> <span class="o">=</span> <span class="s2">&quot;itil&quot;</span><span class="p">;</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After <em>c.server.update();</em>, the process then repeats sending whatever data object the server
+now has back to client, and re-renders if anything changes.</p>
+</div>
+<div class="section" id="processing-the-input-sent-from-client">
+<h3>Processing the input sent from client<a class="headerlink" href="#processing-the-input-sent-from-client" title="Permalink to this headline">¶</a></h3>
+<p>The server client script gets processed in whole after a <em>c.server.update()</em>, so to prevent the
+original query from being processed, we&#8217;ll have to wrap what we want in an <em>if (input) {}</em> statement.
+The only difference from the first <em>onLoad</em> and the runs from the client is the appearance of the
+input object.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">names</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">userGR</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;sys_user&quot;</span><span class="p">);</span>
+    <span class="nx">userGR</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s1">&#39;roles=&#39;</span> <span class="o">+</span> <span class="nx">input</span><span class="p">.</span><span class="nx">button</span><span class="p">);</span>
+    <span class="nx">userGR</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">userGR</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">userGR</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">userGR</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;sys_user&quot;</span><span class="p">);</span>
+    <span class="nx">userGR</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s2">&quot;vip&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="nx">userGR</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">userGR</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="p">.</span><span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">userGR</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The else statement here is defaulted to searching for vip.  When an input is sent to the server
+it will start a new query looking for whatever role is in input.button.</p>
+<p>Code that you want to
+run on both <em>onLoad</em> and when a client re-renders, just put them in the script normally.  Such as
+the initialization of the data.names array on the first line.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Only data will get sent to the client from the server.  If you want to send
+input back you must put it back into the data object.</p>
+<div class="code javascript last highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">data</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">foo</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Slack_Questions/index.html" class="btn btn-neutral float-right" title="Slack Questions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../REST_Messages/index.html" class="btn btn-neutral" title="REST Message v2" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Carter.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.01',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

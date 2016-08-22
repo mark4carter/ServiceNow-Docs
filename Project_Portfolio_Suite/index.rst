@@ -19,16 +19,7 @@ Create Project
 
 |
 |
-
-Project Management
-*******************
-
-
-
-Demand Management
-*************************************
-
-* 
+ 
 
 Waterfall vs Agile
 *******************
