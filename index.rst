@@ -21,6 +21,8 @@ Contents:
 
    REST_Messages/index
 
+   Sending_Attachments_via_REST/index
+
    Service_Portal/index
 
    Slack_Questions/index

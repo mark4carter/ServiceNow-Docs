@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sending Attachments via REST &mdash; ServiceNow Documentation 0.01 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
+        <link rel="next" title="Service Portal" href="../Service_Portal/index.html"/>
+        <link rel="prev" title="REST Message v2" href="../REST_Messages/index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ServiceNow Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contract_Management/index.html">Contract Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Portfolio_Suite/index.html">Project Portfolio Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sending Attachments via REST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#staging-table">Staging Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-transform-map">Create a Transform Map</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#field-maps">Field Maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#agent-scripts">Agent Scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topic-scripts">Topic Scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-the-rest-message">Sending the REST Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-business-rule-script-for-attachment">Example Business Rule Script for Attachment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Service_Portal/index.html">Service Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ServiceNow Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Sending Attachments via REST</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Sending_Attachments_via_REST/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sending-attachments-via-rest">
+<h1>Sending Attachments via REST<a class="headerlink" href="#sending-attachments-via-rest" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This will allow a system to receive a base64 encoded
+string and set it to the attachment table</p>
+</div>
+<div class="section" id="staging-table">
+<h2>Staging Table<a class="headerlink" href="#staging-table" title="Permalink to this headline">¶</a></h2>
+<p>A table should be created that extends the Import Set Row
+table with the following added fields</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="10%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Column label</th>
+<th class="head">Type</th>
+<th class="head">Max length</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>attachment</td>
+<td>String</td>
+<td>1,000,000</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>String</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>ticket number</td>
+<td>String</td>
+<td>1,000</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="create-a-transform-map">
+<h2>Create a Transform Map<a class="headerlink" href="#create-a-transform-map" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="39%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Source table</th>
+<th class="head">Target table</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Attachment Stage to Queue</td>
+<td>Attachment Staging Table</td>
+<td>ecc_queue</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="field-maps">
+<h3>Field Maps<a class="headerlink" href="#field-maps" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Source field</th>
+<th class="head">Target field</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>u_attachment</td>
+<td>payload</td>
+</tr>
+<tr class="row-odd"><td>u_name</td>
+<td>name</td>
+</tr>
+<tr class="row-even"><td>u_ticket_number</td>
+<td>source</td>
+</tr>
+<tr class="row-odd"><td>[Script]</td>
+<td>agent</td>
+</tr>
+<tr class="row-even"><td>[Script]</td>
+<td>topic</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="agent-scripts">
+<h4>Agent Scripts<a class="headerlink" href="#agent-scripts" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">answer</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="nx">transformEntry</span><span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// Add your code here</span>
+  <span class="k">return</span> <span class="s2">&quot;AttachmentCreator&quot;</span><span class="p">;</span> <span class="c1">// return the value to be put into the target field</span>
+
+<span class="p">})(</span><span class="nx">source</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="topic-scripts">
+<h4>Topic Scripts<a class="headerlink" href="#topic-scripts" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">answer</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="nx">transformEntry</span><span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// Add your code here</span>
+  <span class="k">return</span> <span class="s2">&quot;AttachmentCreator&quot;</span><span class="p">;</span> <span class="c1">// return the value to be put into the target field</span>
+
+<span class="p">})(</span><span class="nx">source</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="sending-the-rest-message">
+<h2>Sending the REST Message<a class="headerlink" href="#sending-the-rest-message" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The rest message should be sent with the fields below</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot;u_name&quot;</span><span class="o">:</span><span class="s2">&quot;Something.jpg:image/jpeg&quot;</span><span class="p">,</span>
+<span class="s2">&quot;u_ticket_number&quot;</span><span class="o">:</span><span class="s2">&quot;incident:83bff1fddb2d220003ee793ebf961957&quot;</span><span class="p">,</span>
+<span class="s2">&quot;u_attachment&quot;</span><span class="o">:</span><span class="s2">&quot;e490qugijelkabvrohatge4&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="example-business-rule-script-for-attachment">
+<h2>Example Business Rule Script for Attachment<a class="headerlink" href="#example-business-rule-script-for-attachment" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s1">&#39;sys_attachment&#39;</span><span class="p">);</span>
+<span class="nx">target</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s1">&#39;table_name&#39;</span><span class="p">,</span> <span class="s1">&#39;incident&#39;</span><span class="p">);</span>
+<span class="nx">target</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s1">&#39;table_sys_id&#39;</span><span class="p">,</span> <span class="nx">current</span><span class="p">.</span><span class="nx">sys_id</span><span class="p">);</span>
+<span class="nx">target</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
+
+<span class="k">while</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">sa</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideSysAttachment</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">binData</span> <span class="o">=</span> <span class="nx">sa</span><span class="p">.</span><span class="nx">getBytes</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">base64Data</span> <span class="o">=</span> <span class="nx">GlideStringUtil</span><span class="p">.</span><span class="nx">base64Encode</span><span class="p">(</span><span class="nx">binData</span><span class="p">);</span>
+
+  <span class="c1">//Send Attachments</span>
+  <span class="kd">var</span> <span class="nx">requestAttachment</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sn_ws</span><span class="p">.</span><span class="nx">RESTMessageV2</span><span class="p">();</span>
+  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setEndpoint</span><span class="p">(</span><span class="s1">&#39;https://XXXXX.service-now.com/api/now/import/u_attachment_staging_table&#39;</span><span class="p">);</span>
+  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setHttpMethod</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">);</span>
+
+  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setBasicAuth</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span><span class="nx">password</span><span class="p">);</span>
+  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&quot;Accept&quot;</span><span class="p">,</span><span class="s2">&quot;application/json&quot;</span><span class="p">);</span>
+  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span><span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">requestAttachmentJSONBody</span> <span class="o">=</span> <span class="nx">createRequestBody</span><span class="p">(</span><span class="s2">&quot;u_name&quot;</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">file_name</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="nx">target</span><span class="p">.</span><span class="nx">content_type</span><span class="p">);</span>
+  <span class="nx">requestAttachmentJSONBody</span> <span class="o">+=</span> <span class="nx">addToRequestBody</span><span class="p">(</span><span class="s2">&quot;u_ticket_number&quot;</span><span class="p">,</span> <span class="s1">&#39;incident:&#39;</span> <span class="o">+</span> <span class="nx">sysid</span><span class="p">);</span>
+  <span class="nx">requestAttachmentJSONBody</span> <span class="o">+=</span> <span class="nx">addToRequestBody</span><span class="p">(</span><span class="s2">&quot;u_attachment&quot;</span><span class="p">,</span> <span class="nx">base64Data</span><span class="p">);</span>
+  <span class="nx">requestAttachmentJSONBody</span> <span class="o">+=</span> <span class="nx">closeRequestBody</span><span class="p">();</span>
+
+  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setRequestBody</span><span class="p">(</span><span class="nx">requestAttachmentJSONBody</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">responseAttachment</span> <span class="o">=</span> <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The createRequestBody() functions are just used to create a JSON Object with for example {u_name: &#8220;targetinfo&#8221;, u_ticket_number: &#8220;incident:39024903284&#8221;}</p>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Service_Portal/index.html" class="btn btn-neutral float-right" title="Service Portal" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../REST_Messages/index.html" class="btn btn-neutral" title="REST Message v2" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Carter.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.01',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

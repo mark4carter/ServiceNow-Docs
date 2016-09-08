@@ -209,55 +209,55 @@ and <strong>._generateMissingAllocations()</strong> will generate timecards if t
 <span class="nx">gs</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">newTask</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;cert_follow_on_task&quot;</span><span class="p">);</span>
+<span class="nx">newTask</span><span class="p">.</span><span class="nx">assigned_to</span> <span class="o">=</span> <span class="s2">&quot;0ac0a7f7db20220003ee793ebf961970&quot;</span><span class="p">;</span>
+<span class="nx">newTask</span><span class="p">.</span><span class="nx">short_description</span> <span class="o">=</span> <span class="s2">&quot;Unit Test 08171131&quot;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">taskId</span> <span class="o">=</span> <span class="nx">newTask</span><span class="p">.</span><span class="nx">insert</span><span class="p">();</span>
+<span class="nx">gs</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;taskID = &quot;</span> <span class="o">+</span> <span class="nx">taskId</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">newRP</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;resource_plan&quot;</span><span class="p">);</span>
+  <span class="nx">newRP</span><span class="p">.</span><span class="nx">task</span> <span class="o">=</span> <span class="nx">taskId</span><span class="p">;</span>
+  <span class="nx">newRP</span><span class="p">.</span><span class="nx">start_date</span> <span class="o">=</span> <span class="s2">&quot;2015-01-01&quot;</span><span class="p">;</span>
+  <span class="nx">newRP</span><span class="p">.</span><span class="nx">end_date</span> <span class="o">=</span> <span class="s2">&quot;2019-01-01&quot;</span><span class="p">;</span>
+  <span class="nx">newRP</span><span class="p">.</span><span class="nx">user_resource</span> <span class="o">=</span> <span class="s2">&quot;0ac0a7f7db20220003ee793ebf961970&quot;</span><span class="p">;</span>
+  <span class="nx">newRP</span><span class="p">.</span><span class="nx">resource_type</span> <span class="o">=</span> <span class="s2">&quot;user&quot;</span><span class="p">;</span>
+  <span class="nx">newRP</span><span class="p">.</span><span class="nx">planned_hours</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">resourceId</span> <span class="o">=</span> <span class="nx">newRP</span><span class="p">.</span><span class="nx">insert</span><span class="p">();</span>
+<span class="nx">gs</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;resourceID = &quot;</span> <span class="o">+</span> <span class="nx">resourceId</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">alloc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;resource_allocation&quot;</span><span class="p">);</span>
+    <span class="nx">alloc</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="s2">&quot;0ac0a7f7db20220003ee793ebf961970&quot;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideDate</span><span class="p">();</span>
+    <span class="nx">date</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="s1">&#39;2016-11-05&#39;</span><span class="p">);</span>
+    <span class="nx">alloc</span><span class="p">.</span><span class="nx">start_date</span> <span class="o">=</span> <span class="nx">date</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">date2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideDate</span><span class="p">();</span>
+    <span class="nx">date2</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="s1">&#39;2016-11-23&#39;</span><span class="p">);</span>
+    <span class="nx">alloc</span><span class="p">.</span><span class="nx">end_date</span> <span class="o">=</span> <span class="nx">date2</span><span class="p">;</span>
+    <span class="nx">alloc</span><span class="p">.</span><span class="nx">requested_hours</span> <span class="o">=</span> <span class="s2">&quot;30&quot;</span><span class="p">;</span>
+    <span class="nx">alloc</span><span class="p">.</span><span class="nx">task</span> <span class="o">=</span> <span class="nx">taskId</span><span class="p">;</span>
+    <span class="nx">alloc</span><span class="p">.</span><span class="nx">resource_plan</span> <span class="o">=</span> <span class="nx">resourceId</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">allocationId</span> <span class="o">=</span> <span class="nx">alloc</span><span class="p">.</span><span class="nx">insert</span><span class="p">();</span>
+<span class="nx">gs</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;allocationdId = &quot;</span> <span class="o">+</span> <span class="nx">allocationId</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">alloc2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;resource_allocation&quot;</span><span class="p">);</span>
+    <span class="nx">alloc2</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="s2">&quot;0ac0a7f7db20220003ee793ebf961970&quot;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideDate</span><span class="p">();</span>
+    <span class="nx">date</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="s1">&#39;2016-11-16&#39;</span><span class="p">);</span>
+    <span class="nx">alloc2</span><span class="p">.</span><span class="nx">start_date</span> <span class="o">=</span> <span class="nx">date</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">date2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideDate</span><span class="p">();</span>
+    <span class="nx">date2</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="s1">&#39;2016-12-02&#39;</span><span class="p">);</span>
+    <span class="nx">alloc2</span><span class="p">.</span><span class="nx">end_date</span> <span class="o">=</span> <span class="nx">date2</span><span class="p">;</span>
+    <span class="nx">alloc2</span><span class="p">.</span><span class="nx">requested_hours</span> <span class="o">=</span> <span class="s2">&quot;30&quot;</span><span class="p">;</span>
+    <span class="nx">alloc2</span><span class="p">.</span><span class="nx">task</span> <span class="o">=</span> <span class="nx">taskId</span><span class="p">;</span>
+    <span class="nx">alloc2</span><span class="p">.</span><span class="nx">resource_plan</span> <span class="o">=</span> <span class="nx">resourceId</span><span class="p">;</span>
+
+<span class="nx">allocationId</span> <span class="o">=</span> <span class="nx">alloc2</span><span class="p">.</span><span class="nx">insert</span><span class="p">();</span>
+<span class="nx">gs</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;allocationID2 = &quot;</span> <span class="o">+</span> <span class="nx">allocationId</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>var newTask = new GlideRecord(&#8220;cert_follow_on_task&#8221;);
-newTask.assigned_to = &#8220;0ac0a7f7db20220003ee793ebf961970&#8221;;
-newTask.short_description = &#8220;Unit Test 08171131&#8221;;</p>
-<p>var taskId = newTask.insert();
-gs.log(&#8220;taskID = &#8221; + taskId);</p>
-<dl class="docutils">
-<dt>var newRP = new GlideRecord(&#8220;resource_plan&#8221;);</dt>
-<dd>newRP.task = taskId;
-newRP.start_date = &#8220;2015-01-01&#8221;;
-newRP.end_date = &#8220;2019-01-01&#8221;;
-newRP.user_resource = &#8220;0ac0a7f7db20220003ee793ebf961970&#8221;;
-newRP.resource_type = &#8220;user&#8221;;
-newRP.planned_hours = 0;</dd>
-</dl>
-<p>var resourceId = newRP.insert();
-gs.log(&#8220;resourceID = &#8221; + resourceId);</p>
-<dl class="docutils">
-<dt>var alloc = new GlideRecord(&#8220;resource_allocation&#8221;);</dt>
-<dd>alloc.user = &#8220;0ac0a7f7db20220003ee793ebf961970&#8221;;
-var date = new GlideDate();
-date.setValue(&#8216;2016-11-05&#8217;);
-alloc.start_date = date;
-var date2 = new GlideDate();
-date2.setValue(&#8216;2016-11-23&#8217;);
-alloc.end_date = date2;
-alloc.requested_hours = &#8220;30&#8221;;
-alloc.task = taskId;
-alloc.resource_plan = resourceId;</dd>
-</dl>
-<p>var allocationId = alloc.insert();
-gs.log(&#8220;allocationdId = &#8221; + allocationId);</p>
-<dl class="docutils">
-<dt>var alloc2 = new GlideRecord(&#8220;resource_allocation&#8221;);</dt>
-<dd>alloc2.user = &#8220;0ac0a7f7db20220003ee793ebf961970&#8221;;
-var date = new GlideDate();
-date.setValue(&#8216;2016-11-16&#8217;);
-alloc2.start_date = date;
-var date2 = new GlideDate();
-date2.setValue(&#8216;2016-12-02&#8217;);
-alloc2.end_date = date2;
-alloc2.requested_hours = &#8220;30&#8221;;
-alloc2.task = taskId;
-alloc2.resource_plan = resourceId;</dd>
-</dl>
-<p>allocationId = alloc2.insert();
-gs.log(&#8220;allocationID2 = &#8221; + allocationId);</p>
 </div></blockquote>
 </div>
 </div>
