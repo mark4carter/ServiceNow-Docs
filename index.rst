@@ -15,6 +15,10 @@ Contents:
 
    Contract_Management/index
 
+   Hiding_non-readable_Rows/index
+
+   Istanbul_Notes/index
+
    Project_Portfolio_Suite/index
 
    Reference_Qualifiers/index

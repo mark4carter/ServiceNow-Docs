@@ -84,13 +84,16 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contract_Management/index.html">Contract Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Project_Portfolio_Suite/index.html">Project Portfolio Suite</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sending_Attachments_via_REST/index.html">Sending Attachments via REST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Service_Portal/index.html">Service Portal</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Slack Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#state-choices-from-incident-table-api">State choices from incident table API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#jvar-cart">jvar_cart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#object-in-an-object">object in an object</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
@@ -161,6 +164,47 @@ Good morning everyone! I had a quick question when it came to jelly. I see the s
 <p>If someone could point me to the location of those functions <em>getRequestedFor()</em> that would be <em>most</em> appreciated</p>
 <p><strong>pheedbaq [10:35 AM]</strong>
 englep10 nabil jvar_cart is a reference to a <strong>Java</strong> object. getRequestedFor is a java method, exposed to javascript, on the GlideappCart object. Looks lke the specific method <cite>getRequestedFor</cite> looks at the sc_cart record that the GlideappCart is used with, and returns the sys_id of the user in the “requested_for” field on that sc_cart record.</p>
+</div>
+<div class="section" id="object-in-an-object">
+<h2>object in an object<a class="headerlink" href="#object-in-an-object" title="Permalink to this headline">¶</a></h2>
+<p><strong>professor [1:39 PM]</strong>
+oh this one is a bitch</p>
+<p>[1:39]
+one sec, I think I wrote a thing to solve this</p>
+<p>[1:43]
+blah, here it is</p>
+<p>[1:43]</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">addObjToObj</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">parent</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">parent</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="p">}</span>
+  <span class="nx">parent</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">child</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">parent</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>[1:43]
+one sec, let me jsdoc that and store it in my scripts folder</p>
+<p><strong>nabil [1:46 PM]</strong>
+so what if <cite>parent</cite> and <cite>child</cite> were meant to be the same object?</p>
+<p>[1:46]
+im not looking to return a new object</p>
+<p>[1:46]
+im looking to modify the existing one in place</p>
+<p><strong>professor [1:47 PM]</strong>
+so you want an object to contain... itself?</p>
+<p>[1:47]
+an immutable form of itself so that the child changes as the parent changes?</p>
+<p><strong>nabil [1:47 PM]</strong>
+i want to wrap new properties and have the original turn intoa c hild node of it</p>
+<p>[1:47]
+basically im building a hierarchecal object</p>
+<p>[1:48]
+could be n # of nodes up, n # of nodes down</p>
+<p><strong>professor [1:48 PM]</strong>
+right, so you&#8217;d call the function like this:
+<cite>addObjToObj(originalObject, originalObject, &#8220;orig&#8221;);</cite> (edited)</p>
+<p>[1:48]
+so you&#8217;d say <cite>originalObject = addObjToObj(originalObject, originalObject, &#8220;orig&#8221;);</cite></p>
 </div>
 </div>
 

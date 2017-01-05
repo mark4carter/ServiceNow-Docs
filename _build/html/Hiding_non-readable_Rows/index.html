@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Sending Attachments via REST &mdash; ServiceNow Documentation 0.01 documentation</title>
+  <title>Hiding non-readable Rows in List View &mdash; ServiceNow Documentation 0.01 documentation</title>
   
 
   
@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
-        <link rel="next" title="Service Portal" href="../Service_Portal/index.html"/>
-        <link rel="prev" title="REST Message v2" href="../REST_Messages/index.html"/> 
+        <link rel="next" title="Project Portfolio Suite" href="../Project_Portfolio_Suite/index.html"/>
+        <link rel="prev" title="Contract Management" href="../Contract_Management/index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -84,12 +84,11 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contract_Management/index.html">Contract Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Project_Portfolio_Suite/index.html">Project Portfolio Suite</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Sending Attachments via REST</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hiding non-readable Rows in List View</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#separating-readable-projects-by-department">Separating Readable Projects By Department</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-before-query-business-rule">Creating an Before Query Business Rule</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#staging-table">Staging Table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-transform-map">Create a Transform Map</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#field-maps">Field Maps</a><ul>
@@ -103,6 +102,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#example-business-rule-script-for-attachment">Example Business Rule Script for Attachment</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Portfolio_Suite/index.html">Project Portfolio Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sending_Attachments_via_REST/index.html">Sending Attachments via REST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Service_Portal/index.html">Service Portal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
@@ -137,11 +140,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Sending Attachments via REST</li>
+    <li>Hiding non-readable Rows in List View</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/Sending_Attachments_via_REST/index.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Hiding_non-readable_Rows/index.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -151,12 +154,58 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="sending-attachments-via-rest">
-<h1>Sending Attachments via REST<a class="headerlink" href="#sending-attachments-via-rest" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>This will allow a system to receive a base64 encoded
-string and set it to the attachment table</p>
+  <div class="section" id="hiding-non-readable-rows-in-list-view">
+<h1>Hiding non-readable Rows in List View<a class="headerlink" href="#hiding-non-readable-rows-in-list-view" title="Permalink to this headline">¶</a></h1>
+<div class="myownstyle admonition">
+<p class="first admonition-title">Row Level Security and On Query Business Rules</p>
+<blockquote class="last">
+<div><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="separating-readable-projects-by-department">
+<h2>Separating Readable Projects By Department<a class="headerlink" href="#separating-readable-projects-by-department" title="Permalink to this headline">¶</a></h2>
+<p>If you ever try placing security by record (or by row), your users may start seeing lists views with a count of Rows removed by Securiy contraints.
+Even worse they may think there are no more records, when records can easily be on the first and last page with any number of removed rows in between.</p>
+<a class="reference internal image-reference" href="../_images/Constraints.JPG"><img alt="../_images/Constraints.JPG" src="../_images/Constraints.JPG" style="width: 100%;" /></a>
+<div class="section" id="creating-an-before-query-business-rule">
+<h3>Creating an Before Query Business Rule<a class="headerlink" href="#creating-an-before-query-business-rule" title="Permalink to this headline">¶</a></h3>
+<p>The query created in the Business Rule can be thought of as a filter.  So let&#8217;s say one requirement is to allow anyone from the InfoSec Department to see any
+Contract record.  We would start the Business Rule, by wrapping the filter with an if statement.</p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">userIsInInfoSec</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// Add filter query here</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">userIsInInfoSec</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">//Normal Glide Record query to see if user&#39;s Dept is InfoSec</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Here, the if statement skips the filter as long as they are in the InfoSec Department. Pretty simple right?  Let&#8217;s just add one more type that can skip the filter.</p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">gs</span><span class="p">.</span><span class="nx">hasRole</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">userIsInInfoSec</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// Add filter query here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Next, we need to apply the query.  Let&#8217;s say there&#8217;s a department field on each contract and if a user is in the same department as the one listed in contracts then they
+should be able to view it.</p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">gs</span><span class="p">.</span><span class="nx">hasRole</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">userIsInInfoSec</span><span class="p">())</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">uID</span> <span class="o">=</span> <span class="nx">gs</span><span class="p">.</span><span class="nx">getUserID</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">uGR</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;sys_user&quot;</span><span class="p">);</span>
+  <span class="nx">uGR</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">uID</span><span class="p">);</span>
+
+  <span class="nx">current</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="nx">uGR</span><span class="p">.</span><span class="nx">department</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
 </div>
 <div class="section" id="staging-table">
 <h2>Staging Table<a class="headerlink" href="#staging-table" title="Permalink to this headline">¶</a></h2>
@@ -333,10 +382,10 @@ table with the following added fields</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Service_Portal/index.html" class="btn btn-neutral float-right" title="Service Portal" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Project_Portfolio_Suite/index.html" class="btn btn-neutral float-right" title="Project Portfolio Suite" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../REST_Messages/index.html" class="btn btn-neutral" title="REST Message v2" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../Contract_Management/index.html" class="btn btn-neutral" title="Contract Management" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
