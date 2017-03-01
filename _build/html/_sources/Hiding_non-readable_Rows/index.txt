@@ -15,7 +15,7 @@ Even worse they may think there are no more records, when records can easily be 
 .. image:: img/Constraints.JPG
       :width: 100%
 
-Creating an Before Query Business Rule
+Creating a Before Query Business Rule
 =================================================
 
 The query created in the Business Rule can be thought of as a filter.  So let's say one requirement is to allow anyone from the InfoSec Department to see any
@@ -23,20 +23,12 @@ Contract record.  We would start the Business Rule, by wrapping the filter with 
 
   .. code-block:: javascript
 
-    if (userIsInInfoSec()) {
+    if (gs.hasRole('admin') || userIsInInfoSec()) {
       // Add filter query here
     }
 
     function userIsInInfoSec() {
       //Normal Glide Record query to see if user's Dept is InfoSec
-    }
-
-Here, the if statement skips the filter as long as they are in the InfoSec Department. Pretty simple right?  Let's just add one more type that can skip the filter.
-
-  .. code-block:: javascript
-
-    if (gs.hasRole('admin') || userIsInInfoSec()) {
-      // Add filter query here
     }
 
 Next, we need to apply the query.  Let's say there's a department field on each contract and if a user is in the same department as the one listed in contracts then they
@@ -52,126 +44,17 @@ should be able to view it.
       current.addQuery('department', uGR.department);
     }
 
-
-
-
-Staging Table
-*******************************
-
-A table should be created that extends the Import Set Row
-table with the following added fields
-
-    +-------------------+----------+----------------------------------------------------------------------+
-    | Column label      | Type     |  Max length                                                          |
-    +===================+==========+======================================================================+
-    | attachment        | String   |   1,000,000                                                          |
-    +-------------------+----------+----------------------------------------------------------------------+
-    | name              | String   |                                                                      |
-    +-------------------+----------+----------------------------------------------------------------------+
-    | ticket number     | String   |     1,000                                                            |
-    +-------------------+----------+----------------------------------------------------------------------+
-
-
-
-Create a Transform Map
-************************************
-
-    +-----------------------------+--------------------------------------+-------------------------------+
-    | Name                        | Source table                         |  Target table                 |           
-    +=============================+======================================+===============================+
-    | Attachment Stage to Queue   | Attachment Staging Table             |   ecc_queue                   |
-    +-----------------------------+--------------------------------------+-------------------------------+
-
-
-Field Maps
-=========================================
-
-    +-------------------+------------------+
-    | Source field      | Target field     |                                    
-    +===================+==================+
-    | u_attachment      | payload          |
-    +-------------------+------------------+
-    | u_name            | name             |
-    +-------------------+------------------+
-    | u_ticket_number   | source           |
-    +-------------------+------------------+
-    | [Script]          | agent            |
-    +-------------------+------------------+
-    | [Script]          | topic            |
-    +-------------------+------------------+
-
-Agent Scripts
--------------------------
+What the query is doing here is returning only records that match department with the current user's department.  These will be the only records that will show in list view and will
+remove the security constraints, as long as they have security rights.  Below, we are going to add another query where all contracts in the "Guest" department can be viewed as well.
 
   .. code-block:: javascript
 
-    answer = (function transformEntry(source) {
+    if (gs.hasRole('admin') || userIsInInfoSec()) {
+      var uID = gs.getUserID();
+      var uGR = new GlideRecord("sys_user");
+      uGR.get(uID);
 
-      // Add your code here
-      return "AttachmentCreator"; // return the value to be put into the target field
-
-    })(source);
-
-Topic Scripts
--------------------------
-
-  .. code-block:: javascript
-
-    answer = (function transformEntry(source) {
-
-      // Add your code here
-      return "AttachmentCreator"; // return the value to be put into the target field
-
-    })(source);
-
-
-
-Sending the REST Message
-*************************************
-
-  The rest message should be sent with the fields below
-
-  .. code-block:: javascript
-
-    {
-    "u_name":"Something.jpg:image/jpeg",
-    "u_ticket_number":"incident:83bff1fddb2d220003ee793ebf961957",
-    "u_attachment":"e490qugijelkabvrohatge4",
+      var q = current.addQuery('department', uGR.department);
+      q.addOrCondition('department', 'Guest');
     }
 
-
-Example Business Rule Script for Attachment
-************************************************
-
-  .. code-block:: javascript
-
-    var target = new GlideRecord('sys_attachment'); 
-    target.addQuery('table_name', 'incident');
-    target.addQuery('table_sys_id', current.sys_id);
-    target.query(); 
-
-    while(target.next()) {
-      var sa = new GlideSysAttachment();
-      var binData = sa.getBytes(target);
-      var base64Data = GlideStringUtil.base64Encode(binData);
-
-      //Send Attachments
-      var requestAttachment = new sn_ws.RESTMessageV2();
-      requestAttachment.setEndpoint('https://XXXXX.service-now.com/api/now/import/u_attachment_staging_table');
-      requestAttachment.setHttpMethod('POST');
-
-      requestAttachment.setBasicAuth(user,password);
-      requestAttachment.setRequestHeader("Accept","application/json");
-      requestAttachment.setRequestHeader('Content-Type','application/json');
-
-      var requestAttachmentJSONBody = createRequestBody("u_name", target.file_name + ":" + target.content_type);
-      requestAttachmentJSONBody += addToRequestBody("u_ticket_number", 'incident:' + sysid);
-      requestAttachmentJSONBody += addToRequestBody("u_attachment", base64Data);
-      requestAttachmentJSONBody += closeRequestBody();
-
-      requestAttachment.setRequestBody(requestAttachmentJSONBody);
-
-      var responseAttachment = requestAttachment.execute();
-    }
-
-  The createRequestBody() functions are just used to create a JSON Object with for example {u_name: "targetinfo", u_ticket_number: "incident:39024903284"}

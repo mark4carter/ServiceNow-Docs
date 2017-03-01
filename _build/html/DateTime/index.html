@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Content Management System &mdash; ServiceNow Documentation 0.01 documentation</title>
+  <title>Date Time Servicenow &mdash; ServiceNow Documentation 0.01 documentation</title>
   
 
   
@@ -32,7 +32,7 @@
   
     <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
         <link rel="next" title="Hiding non-readable Rows in List View" href="../Hiding_non-readable_Rows/index.html"/>
-        <link rel="prev" title="Welcome to ServiceNow Documentation’s documentation!" href="../index.html"/> 
+        <link rel="prev" title="Content Management System" href="../CMS/index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,8 +82,9 @@
             
             
                 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Content Management System</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#continue-shopping-redirection">Continue Shopping Redirection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Date Time Servicenow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#update-review-date">Update Review Date</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
@@ -125,11 +126,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Content Management System</li>
+    <li>Date Time Servicenow</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/CMS/index.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/DateTime/index.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -139,19 +140,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="content-management-system">
-<h1>Content Management System<a class="headerlink" href="#content-management-system" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="continue-shopping-redirection">
-<h2>Continue Shopping Redirection<a class="headerlink" href="#continue-shopping-redirection" title="Permalink to this headline">¶</a></h2>
-<p>After a rebranding effort, everything seemed to work fine except a continue shopping button.
-The error didn&#8217;t creep up until later in the month.  This value is not found in a UI Macro
-as first expected.  The value is actually a field in a record under Service Catalog -&gt; Maintain Catalogs.</p>
-<p>In this particular task, I had to inside one more step deeper into the Service Catalog record and choose
-the specific site.</p>
-<a class="reference internal image-reference" href="../_images/sc_list.JPG"><img alt="../_images/sc_list.JPG" src="../_images/sc_list.JPG" style="width: 100%;" /></a>
-<p>Then within I changed the fields CMS &#8216;Continue Shopping&#8217; page</p>
-<a class="reference internal image-reference" href="../_images/shop_field.JPG"><img alt="../_images/shop_field.JPG" src="../_images/shop_field.JPG" style="width: 75%;" /></a>
-<p>Ref: <a class="reference external" href="https://community.servicenow.com/community/service-management/service-catalog/blog/2015/05/01/how-to-get-continue-shopping-buttons-to-work-in-your-service-catalog">https://community.servicenow.com/community/service-management/service-catalog/blog/2015/05/01/how-to-get-continue-shopping-buttons-to-work-in-your-service-catalog</a></p>
+  <div class="section" id="date-time-servicenow">
+<h1>Date Time Servicenow<a class="headerlink" href="#date-time-servicenow" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="update-review-date">
+<h2>Update Review Date<a class="headerlink" href="#update-review-date" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span> <span class="nx">executeRule</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span> <span class="cm">/*null when async*/</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">gdt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideDateTime</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">ends</span><span class="p">);</span>
+    <span class="nx">gdt</span><span class="p">.</span><span class="nx">addDays</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
+    <span class="nx">current</span><span class="p">.</span><span class="nx">u_review_date_custom</span> <span class="o">=</span> <span class="nx">gdt</span><span class="p">;</span>
+
+<span class="p">})(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>.addDays() will addDays to the time, but does not return a glideDateTime</p>
+<p class="last">current.ends is a Date (not DateTime) field</p>
+</div>
 </div>
 </div>
 
@@ -165,7 +171,7 @@ the specific site.</p>
         <a href="../Hiding_non-readable_Rows/index.html" class="btn btn-neutral float-right" title="Hiding non-readable Rows in List View" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="Welcome to ServiceNow Documentation’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../CMS/index.html" class="btn btn-neutral" title="Content Management System" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

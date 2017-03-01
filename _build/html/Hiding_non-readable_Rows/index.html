@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
-        <link rel="next" title="Project Portfolio Suite" href="../Project_Portfolio_Suite/index.html"/>
-        <link rel="prev" title="Contract Management" href="../Contract_Management/index.html"/> 
+        <link rel="next" title="Instanbul Notes" href="../Istanbul_Notes/index.html"/>
+        <link rel="prev" title="Content Management System" href="../CMS/index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -83,26 +83,14 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Contract_Management/index.html">Contract Management</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Hiding non-readable Rows in List View</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#separating-readable-projects-by-department">Separating Readable Projects By Department</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#creating-an-before-query-business-rule">Creating an Before Query Business Rule</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#staging-table">Staging Table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-transform-map">Create a Transform Map</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#field-maps">Field Maps</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#agent-scripts">Agent Scripts</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#topic-scripts">Topic Scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-before-query-business-rule">Creating a Before Query Business Rule</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#sending-the-rest-message">Sending the REST Message</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-business-rule-script-for-attachment">Example Business Rule Script for Attachment</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../Project_Portfolio_Suite/index.html">Project Portfolio Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Istanbul_Notes/index.html">Instanbul Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Sending_Attachments_via_REST/index.html">Sending Attachments via REST</a></li>
@@ -169,25 +157,17 @@
 <p>If you ever try placing security by record (or by row), your users may start seeing lists views with a count of Rows removed by Securiy contraints.
 Even worse they may think there are no more records, when records can easily be on the first and last page with any number of removed rows in between.</p>
 <a class="reference internal image-reference" href="../_images/Constraints.JPG"><img alt="../_images/Constraints.JPG" src="../_images/Constraints.JPG" style="width: 100%;" /></a>
-<div class="section" id="creating-an-before-query-business-rule">
-<h3>Creating an Before Query Business Rule<a class="headerlink" href="#creating-an-before-query-business-rule" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="creating-a-before-query-business-rule">
+<h3>Creating a Before Query Business Rule<a class="headerlink" href="#creating-a-before-query-business-rule" title="Permalink to this headline">¶</a></h3>
 <p>The query created in the Business Rule can be thought of as a filter.  So let&#8217;s say one requirement is to allow anyone from the InfoSec Department to see any
 Contract record.  We would start the Business Rule, by wrapping the filter with an if statement.</p>
 <blockquote>
-<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">userIsInInfoSec</span><span class="p">())</span> <span class="p">{</span>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">gs</span><span class="p">.</span><span class="nx">hasRole</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">userIsInInfoSec</span><span class="p">())</span> <span class="p">{</span>
   <span class="c1">// Add filter query here</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">userIsInInfoSec</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">//Normal Glide Record query to see if user&#39;s Dept is InfoSec</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>Here, the if statement skips the filter as long as they are in the InfoSec Department. Pretty simple right?  Let&#8217;s just add one more type that can skip the filter.</p>
-<blockquote>
-<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">gs</span><span class="p">.</span><span class="nx">hasRole</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">userIsInInfoSec</span><span class="p">())</span> <span class="p">{</span>
-  <span class="c1">// Add filter query here</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -205,173 +185,21 @@ should be able to view it.</p>
 </pre></div>
 </div>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="staging-table">
-<h2>Staging Table<a class="headerlink" href="#staging-table" title="Permalink to this headline">¶</a></h2>
-<p>A table should be created that extends the Import Set Row
-table with the following added fields</p>
+<p>What the query is doing here is returning only records that match department with the current user&#8217;s department.  These will be the only records that will show in list view and will
+remove the security constraints, as long as they have security rights.  Below, we are going to add another query where all contracts in the &#8220;Guest&#8221; department can be viewed as well.</p>
 <blockquote>
-<div><table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="10%" />
-<col width="71%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Column label</th>
-<th class="head">Type</th>
-<th class="head">Max length</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>attachment</td>
-<td>String</td>
-<td>1,000,000</td>
-</tr>
-<tr class="row-odd"><td>name</td>
-<td>String</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>ticket number</td>
-<td>String</td>
-<td>1,000</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-</div>
-<div class="section" id="create-a-transform-map">
-<h2>Create a Transform Map<a class="headerlink" href="#create-a-transform-map" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><table border="1" class="docutils">
-<colgroup>
-<col width="30%" />
-<col width="39%" />
-<col width="32%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Name</th>
-<th class="head">Source table</th>
-<th class="head">Target table</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Attachment Stage to Queue</td>
-<td>Attachment Staging Table</td>
-<td>ecc_queue</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<div class="section" id="field-maps">
-<h3>Field Maps<a class="headerlink" href="#field-maps" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><table border="1" class="docutils">
-<colgroup>
-<col width="51%" />
-<col width="49%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Source field</th>
-<th class="head">Target field</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>u_attachment</td>
-<td>payload</td>
-</tr>
-<tr class="row-odd"><td>u_name</td>
-<td>name</td>
-</tr>
-<tr class="row-even"><td>u_ticket_number</td>
-<td>source</td>
-</tr>
-<tr class="row-odd"><td>[Script]</td>
-<td>agent</td>
-</tr>
-<tr class="row-even"><td>[Script]</td>
-<td>topic</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<div class="section" id="agent-scripts">
-<h4>Agent Scripts<a class="headerlink" href="#agent-scripts" title="Permalink to this headline">¶</a></h4>
-<blockquote>
-<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">answer</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="nx">transformEntry</span><span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">gs</span><span class="p">.</span><span class="nx">hasRole</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">userIsInInfoSec</span><span class="p">())</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">uID</span> <span class="o">=</span> <span class="nx">gs</span><span class="p">.</span><span class="nx">getUserID</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">uGR</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;sys_user&quot;</span><span class="p">);</span>
+  <span class="nx">uGR</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">uID</span><span class="p">);</span>
 
-  <span class="c1">// Add your code here</span>
-  <span class="k">return</span> <span class="s2">&quot;AttachmentCreator&quot;</span><span class="p">;</span> <span class="c1">// return the value to be put into the target field</span>
-
-<span class="p">})(</span><span class="nx">source</span><span class="p">);</span>
-</pre></div>
-</div>
-</div></blockquote>
-</div>
-<div class="section" id="topic-scripts">
-<h4>Topic Scripts<a class="headerlink" href="#topic-scripts" title="Permalink to this headline">¶</a></h4>
-<blockquote>
-<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">answer</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="nx">transformEntry</span><span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
-
-  <span class="c1">// Add your code here</span>
-  <span class="k">return</span> <span class="s2">&quot;AttachmentCreator&quot;</span><span class="p">;</span> <span class="c1">// return the value to be put into the target field</span>
-
-<span class="p">})(</span><span class="nx">source</span><span class="p">);</span>
-</pre></div>
-</div>
-</div></blockquote>
-</div>
-</div>
-</div>
-<div class="section" id="sending-the-rest-message">
-<h2>Sending the REST Message<a class="headerlink" href="#sending-the-rest-message" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>The rest message should be sent with the fields below</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="s2">&quot;u_name&quot;</span><span class="o">:</span><span class="s2">&quot;Something.jpg:image/jpeg&quot;</span><span class="p">,</span>
-<span class="s2">&quot;u_ticket_number&quot;</span><span class="o">:</span><span class="s2">&quot;incident:83bff1fddb2d220003ee793ebf961957&quot;</span><span class="p">,</span>
-<span class="s2">&quot;u_attachment&quot;</span><span class="o">:</span><span class="s2">&quot;e490qugijelkabvrohatge4&quot;</span><span class="p">,</span>
+  <span class="kd">var</span> <span class="nx">q</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="nx">uGR</span><span class="p">.</span><span class="nx">department</span><span class="p">);</span>
+  <span class="nx">q</span><span class="p">.</span><span class="nx">addOrCondition</span><span class="p">(</span><span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="s1">&#39;Guest&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div></blockquote>
 </div>
-<div class="section" id="example-business-rule-script-for-attachment">
-<h2>Example Business Rule Script for Attachment<a class="headerlink" href="#example-business-rule-script-for-attachment" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s1">&#39;sys_attachment&#39;</span><span class="p">);</span>
-<span class="nx">target</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s1">&#39;table_name&#39;</span><span class="p">,</span> <span class="s1">&#39;incident&#39;</span><span class="p">);</span>
-<span class="nx">target</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s1">&#39;table_sys_id&#39;</span><span class="p">,</span> <span class="nx">current</span><span class="p">.</span><span class="nx">sys_id</span><span class="p">);</span>
-<span class="nx">target</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
-
-<span class="k">while</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">sa</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideSysAttachment</span><span class="p">();</span>
-  <span class="kd">var</span> <span class="nx">binData</span> <span class="o">=</span> <span class="nx">sa</span><span class="p">.</span><span class="nx">getBytes</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
-  <span class="kd">var</span> <span class="nx">base64Data</span> <span class="o">=</span> <span class="nx">GlideStringUtil</span><span class="p">.</span><span class="nx">base64Encode</span><span class="p">(</span><span class="nx">binData</span><span class="p">);</span>
-
-  <span class="c1">//Send Attachments</span>
-  <span class="kd">var</span> <span class="nx">requestAttachment</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sn_ws</span><span class="p">.</span><span class="nx">RESTMessageV2</span><span class="p">();</span>
-  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setEndpoint</span><span class="p">(</span><span class="s1">&#39;https://XXXXX.service-now.com/api/now/import/u_attachment_staging_table&#39;</span><span class="p">);</span>
-  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setHttpMethod</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">);</span>
-
-  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setBasicAuth</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span><span class="nx">password</span><span class="p">);</span>
-  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&quot;Accept&quot;</span><span class="p">,</span><span class="s2">&quot;application/json&quot;</span><span class="p">);</span>
-  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span><span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
-
-  <span class="kd">var</span> <span class="nx">requestAttachmentJSONBody</span> <span class="o">=</span> <span class="nx">createRequestBody</span><span class="p">(</span><span class="s2">&quot;u_name&quot;</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">file_name</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="nx">target</span><span class="p">.</span><span class="nx">content_type</span><span class="p">);</span>
-  <span class="nx">requestAttachmentJSONBody</span> <span class="o">+=</span> <span class="nx">addToRequestBody</span><span class="p">(</span><span class="s2">&quot;u_ticket_number&quot;</span><span class="p">,</span> <span class="s1">&#39;incident:&#39;</span> <span class="o">+</span> <span class="nx">sysid</span><span class="p">);</span>
-  <span class="nx">requestAttachmentJSONBody</span> <span class="o">+=</span> <span class="nx">addToRequestBody</span><span class="p">(</span><span class="s2">&quot;u_attachment&quot;</span><span class="p">,</span> <span class="nx">base64Data</span><span class="p">);</span>
-  <span class="nx">requestAttachmentJSONBody</span> <span class="o">+=</span> <span class="nx">closeRequestBody</span><span class="p">();</span>
-
-  <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">setRequestBody</span><span class="p">(</span><span class="nx">requestAttachmentJSONBody</span><span class="p">);</span>
-
-  <span class="kd">var</span> <span class="nx">responseAttachment</span> <span class="o">=</span> <span class="nx">requestAttachment</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>The createRequestBody() functions are just used to create a JSON Object with for example {u_name: &#8220;targetinfo&#8221;, u_ticket_number: &#8220;incident:39024903284&#8221;}</p>
-</div></blockquote>
 </div>
 </div>
 
@@ -382,10 +210,10 @@ table with the following added fields</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Project_Portfolio_Suite/index.html" class="btn btn-neutral float-right" title="Project Portfolio Suite" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Istanbul_Notes/index.html" class="btn btn-neutral float-right" title="Instanbul Notes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../Contract_Management/index.html" class="btn btn-neutral" title="Contract Management" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../CMS/index.html" class="btn btn-neutral" title="Content Management System" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -15,7 +15,7 @@ Even worse they may think there are no more records, when records can easily be 
 .. image:: img/Constraints.JPG
       :width: 100%
 
-Creating an Before Query Business Rule
+Creating a Before Query Business Rule
 =================================================
 
 The query created in the Business Rule can be thought of as a filter.  So let's say one requirement is to allow anyone from the InfoSec Department to see any

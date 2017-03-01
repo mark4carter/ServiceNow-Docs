@@ -13,11 +13,11 @@ Contents:
 
    CMS/index
 
-   Contract_Management/index
+   DateTime/index
 
    Hiding_non-readable_Rows/index
 
-   Project_Portfolio_Suite/index
+   Istanbul_Notes/index
 
    Reference_Qualifiers/index
 
