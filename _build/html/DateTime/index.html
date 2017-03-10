@@ -32,7 +32,7 @@
   
     <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
         <link rel="next" title="Hiding non-readable Rows in List View" href="../Hiding_non-readable_Rows/index.html"/>
-        <link rel="prev" title="Content Management System" href="../CMS/index.html"/> 
+        <link rel="prev" title="Copying Data" href="../Copying_Data/index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -83,8 +83,11 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Copying_Data/index.html">Copying Data</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Date Time Servicenow</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#update-review-date">Update Review Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparing-due-date-with-start-date">Comparing Due Date with Start Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparing-dates-when-days-doesn-t-matter-untested">Comparing Dates when days doesn&#8217;t matter (untested)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
@@ -96,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Workflow/index.html">Workflows</a></li>
 </ul>
 
             
@@ -159,6 +163,43 @@
 <p class="last">current.ends is a Date (not DateTime) field</p>
 </div>
 </div>
+<div class="section" id="comparing-due-date-with-start-date">
+<h2>Comparing Due Date with Start Date<a class="headerlink" href="#comparing-due-date-with-start-date" title="Permalink to this headline">¶</a></h2>
+<p>On Change Client Script for Due Date</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">onChange</span><span class="p">(</span><span class="nx">control</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">newValue</span><span class="p">,</span> <span class="nx">isLoading</span><span class="p">,</span> <span class="nx">isTemplate</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span> <span class="o">||</span> <span class="nx">g_form</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;expected_start&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+   <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">start_date</span> <span class="o">=</span> <span class="nx">g_form</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;expected_start&quot;</span><span class="p">);</span>
+
+  <span class="c1">//Calls serverside script to check if start date is earlier than due date</span>
+  <span class="kd">var</span> <span class="nx">ajax</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideAjax</span><span class="p">(</span><span class="s1">&#39;TransferOrderDateTimeAjax&#39;</span><span class="p">);</span>
+  <span class="nx">ajax</span><span class="p">.</span><span class="nx">addParam</span><span class="p">(</span><span class="s1">&#39;sysparm_name&#39;</span><span class="p">,</span><span class="s1">&#39;compareDatesAjax&#39;</span><span class="p">);</span>
+  <span class="nx">ajax</span><span class="p">.</span><span class="nx">addParam</span><span class="p">(</span><span class="s1">&#39;sysparm_startDate&#39;</span><span class="p">,</span> <span class="nx">start_date</span><span class="p">);</span>
+  <span class="nx">ajax</span><span class="p">.</span><span class="nx">addParam</span><span class="p">(</span><span class="s1">&#39;sysparm_endDate&#39;</span><span class="p">,</span> <span class="nx">newValue</span><span class="p">);</span>
+  <span class="nx">ajax</span><span class="p">.</span><span class="nx">getXML</span><span class="p">(</span><span class="nx">warnIfFalse</span><span class="p">);</span>
+
+  <span class="c1">//Callback will display error if start date is earlier than due date</span>
+  <span class="kd">function</span> <span class="nx">warnIfFalse</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">answer</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">responseXML</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;answer&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">answer</span> <span class="o">==</span> <span class="s2">&quot;false&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">g_form</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="s2">&quot;due_date&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+      <span class="nx">g_form</span><span class="p">.</span><span class="nx">showErrorBox</span><span class="p">(</span><span class="s2">&quot;due_date&quot;</span><span class="p">,</span> <span class="s2">&quot;Due Date must be after Start Date&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="comparing-dates-when-days-doesn-t-matter-untested">
+<h2>Comparing Dates when days doesn&#8217;t matter (untested)<a class="headerlink" href="#comparing-dates-when-days-doesn-t-matter-untested" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Uses a milisecond timestamp, works for either Date or Date/Time</div></blockquote>
+<p>..code-block:: javascript</p>
+<blockquote>
+<div>newDate(g_form.getValue(&#8220;expected_start&#8221;)).getTime() &gt; newDate(g_form.getValue(&#8220;due_date&#8221;)).getTime()</div></blockquote>
+</div>
 </div>
 
 
@@ -171,7 +212,7 @@
         <a href="../Hiding_non-readable_Rows/index.html" class="btn btn-neutral float-right" title="Hiding non-readable Rows in List View" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../CMS/index.html" class="btn btn-neutral" title="Content Management System" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../Copying_Data/index.html" class="btn btn-neutral" title="Copying Data" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
