@@ -13,6 +13,8 @@ Contents:
 
    CMS/index
 
+   Copying_Data/index
+
    DateTime/index
 
    Hiding_non-readable_Rows/index
