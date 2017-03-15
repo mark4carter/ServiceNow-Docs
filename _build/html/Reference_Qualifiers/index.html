@@ -83,6 +83,8 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Copying_Data/index.html">Copying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DateTime/index.html">Date Time Servicenow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Istanbul_Notes/index.html">Instanbul Notes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reference Qualifiers</a><ul>
@@ -91,6 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#the-dyanmic-filter-option">The Dyanmic Filter Option</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#qualifier-that-uses-multiple-queries">Qualifier that uses multiple queries</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
@@ -99,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Workflow/index.html">Workflows</a></li>
 </ul>
 
             
@@ -200,6 +204,38 @@ which is a selection.</p>
 <div class="section" id="the-dyanmic-filter-option">
 <h3>The Dyanmic Filter Option<a class="headerlink" href="#the-dyanmic-filter-option" title="Permalink to this headline">¶</a></h3>
 <p>Ref: <a class="reference external" href="https://www.packtpub.com/mapt/book/Networking%20and%20Servers/9781782174219/02/ch02lvl1sec26/Scripting%20Reference%20Qualifiers">https://www.packtpub.com/mapt/book/Networking%20and%20Servers/9781782174219/02/ch02lvl1sec26/Scripting%20Reference%20Qualifiers</a></p>
+</div>
+</div>
+<div class="section" id="qualifier-that-uses-multiple-queries">
+<h2>Qualifier that uses multiple queries<a class="headerlink" href="#qualifier-that-uses-multiple-queries" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="c1">//getUserGroupsAsArray(), just grabs all user&#39;s groups and puts them into an array</span>
+<span class="kd">var</span> <span class="nx">userGroups</span> <span class="o">=</span> <span class="nx">getUserGroupsAsArray</span><span class="p">();</span>
+
+<span class="c1">//---------------------------------------------------</span>
+<span class="c1">//!  Here each query checks to see if  queried group</span>
+<span class="c1">//!    is in one of the userGroups array</span>
+<span class="c1">//---------------------------------------------------</span>
+<span class="kd">var</span> <span class="nx">portfolioGR</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;pm_portfolio&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">q</span> <span class="o">=</span> <span class="nx">portfolioGR</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="s2">&quot;u_department.u_ppm_group&quot;</span><span class="p">,</span> <span class="s1">&#39;IN&#39;</span><span class="p">,</span> <span class="nx">userGroups</span><span class="p">);</span>
+<span class="nx">q</span><span class="p">.</span><span class="nx">addOrCondition</span><span class="p">(</span><span class="s1">&#39;u_department.parent.u_ppm_group&#39;</span><span class="p">,</span> <span class="s1">&#39;IN&#39;</span><span class="p">,</span> <span class="nx">userGroups</span><span class="p">);</span>
+<span class="nx">q</span><span class="p">.</span><span class="nx">addOrCondition</span><span class="p">(</span><span class="s1">&#39;u_department.u_ppm_agency_intake_group&#39;</span><span class="p">,</span> <span class="s1">&#39;IN&#39;</span><span class="p">,</span> <span class="nx">userGroups</span><span class="p">);</span>
+<span class="nx">q</span><span class="p">.</span><span class="nx">addOrCondition</span><span class="p">(</span><span class="s1">&#39;u_department.parent.u_ppm_agency_intake_group&#39;</span><span class="p">,</span> <span class="s1">&#39;IN&#39;</span><span class="p">,</span> <span class="nx">userGroups</span><span class="p">);</span>
+<span class="nx">q</span><span class="p">.</span><span class="nx">addOrCondition</span><span class="p">(</span><span class="s1">&#39;u_department.u_customer_engagement_group&#39;</span><span class="p">,</span> <span class="s1">&#39;IN&#39;</span><span class="p">,</span> <span class="nx">userGroups</span><span class="p">);</span>
+<span class="nx">q</span><span class="p">.</span><span class="nx">addOrCondition</span><span class="p">(</span><span class="s1">&#39;u_department.parent.u_customer_engagement_group&#39;</span><span class="p">,</span> <span class="s1">&#39;IN&#39;</span><span class="p">,</span> <span class="nx">userGroups</span><span class="p">);</span>
+<span class="nx">portfolioGR</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">portfolioArray</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="k">while</span><span class="p">(</span><span class="nx">portfolioGR</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nx">portfolioArray</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">portfolioGR</span><span class="p">.</span><span class="nx">sys_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">//unique() function takes out any duplicates</span>
+<span class="kd">var</span> <span class="nx">arrayUtil</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayUtil</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">cleanPortfolioArray</span> <span class="o">=</span> <span class="nx">arrayUtil</span><span class="p">.</span><span class="nx">unique</span><span class="p">(</span><span class="nx">portfolioArray</span><span class="p">);</span>
+
+<span class="k">return</span> <span class="s1">&#39;sys_idIN&#39;</span> <span class="o">+</span> <span class="nx">cleanPortfolioArray</span><span class="p">;</span>
+</pre></div>
 </div>
 </div>
 </div>

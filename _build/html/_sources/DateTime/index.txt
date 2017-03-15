@@ -66,4 +66,4 @@ Comparing Dates when days doesn't matter (untested)
 
 ..code-block:: javascript
 
-  newDate(g_form.getValue("expected_start")).getTime() > newDate(g_form.getValue("due_date")).getTime()
+    newDate(g_form.getValue("expected_start")).getTime() > newDate(g_form.getValue("due_date")).getTime()

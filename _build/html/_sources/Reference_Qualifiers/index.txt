@@ -64,3 +64,38 @@ The Dyanmic Filter Option
 
 
 Ref: https://www.packtpub.com/mapt/book/Networking%20and%20Servers/9781782174219/02/ch02lvl1sec26/Scripting%20Reference%20Qualifiers
+
+
+Qualifier that uses multiple queries
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: javascript
+
+	//getUserGroupsAsArray(), just grabs all user's groups and puts them into an array
+	var userGroups = getUserGroupsAsArray();
+			
+	//---------------------------------------------------
+	//!  Here each query checks to see if  queried group
+	//!    is in one of the userGroups array
+	//---------------------------------------------------
+	var portfolioGR = new GlideRecord("pm_portfolio");
+	var q = portfolioGR.addQuery("u_department.u_ppm_group", 'IN', userGroups);
+	q.addOrCondition('u_department.parent.u_ppm_group', 'IN', userGroups);
+	q.addOrCondition('u_department.u_ppm_agency_intake_group', 'IN', userGroups);
+	q.addOrCondition('u_department.parent.u_ppm_agency_intake_group', 'IN', userGroups);
+	q.addOrCondition('u_department.u_customer_engagement_group', 'IN', userGroups);
+	q.addOrCondition('u_department.parent.u_customer_engagement_group', 'IN', userGroups);
+	portfolioGR.query();
+	
+	var portfolioArray = [];
+	
+	while(portfolioGR.next()) {
+		portfolioArray.push(portfolioGR.sys_id.toString());
+	}
+	
+	//unique() function takes out any duplicates
+	var arrayUtil = new ArrayUtil();
+	var cleanPortfolioArray = arrayUtil.unique(portfolioArray);
+	
+	return 'sys_idIN' + cleanPortfolioArray;
+	

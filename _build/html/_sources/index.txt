@@ -15,6 +15,8 @@ Contents:
 
    Copying_Data/index
 
+   CORS_Error/index
+
    DateTime/index
 
    Hiding_non-readable_Rows/index
@@ -30,6 +32,8 @@ Contents:
    Service_Portal/index
 
    Slack_Questions/index
+
+   Sphinx_Shortcuts/index
 
    Time_Cards/index
 
