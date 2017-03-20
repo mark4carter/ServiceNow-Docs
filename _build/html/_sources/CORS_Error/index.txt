@@ -14,6 +14,12 @@ How to get around CORS Exception
     
     chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
 
+Depending on location of Chrome, file can be run with single line below
+
+.. code-block:: PowerShell
+
+	"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir="C:/Chrome dev session" --disable-web-security
+
 .. warning:: 
 
 	Goes without saying !! be careful of security
