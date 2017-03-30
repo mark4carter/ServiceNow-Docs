@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>UI Pages &mdash; ServiceNow Documentation 0.01 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
+        <link rel="next" title="Working With Variable Sets" href="../Variable_Sets/index.html"/>
+        <link rel="prev" title="Time Card Modifications" href="../Time_Cards/index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ServiceNow Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Copying_Data/index.html">Copying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CORS_Error/index.html">CORS Error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DateTime/index.html">Date Time Servicenow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Istanbul_Notes/index.html">Instanbul Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OAuth/index.html">OAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sending_Attachments_via_REST/index.html">Sending Attachments via REST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Service_Portal/index.html">Service Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sphinx_Shortcuts/index.html">Sphinx Shortcuts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">UI Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#triggering-on-change-for-select-box">Triggering on change for select box</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#html">HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#client-script">Client Script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Workflow/index.html">Workflows</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ServiceNow Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>UI Pages</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/UI_Pages/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ui-pages">
+<h1>UI Pages<a class="headerlink" href="#ui-pages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="triggering-on-change-for-select-box">
+<h2>Triggering on change for select box<a class="headerlink" href="#triggering-on-change-for-select-box" title="Permalink to this headline">¶</a></h2>
+<p>To prevent using gel, we can pass in the current value of the select box using <cite>this.value</cite></p>
+<div class="section" id="html">
+<h3>HTML<a class="headerlink" href="#html" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">g:evaluate</span><span class="p">&gt;</span>
+  var choiceList = new GlideChoiceList();
+  choiceList.add(&#39;&#39;, &#39;--None--&#39;);
+  choiceList.add(&#39;123&#39;, &#39;OneTwoThree&#39;);
+  choiceList.add(&#39;FourFiveSix&#39;, &#39;456&#39;);
+<span class="p">&lt;/</span><span class="nt">g:evaluate</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">select</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;document_select&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;document_select&quot;</span> <span class="na">onchange</span><span class="o">=</span><span class="s">&quot;myFunction(this.value)&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">g:options</span> <span class="na">choiceList</span><span class="o">=</span><span class="s">&quot;${choiceList}&quot;</span> <span class="na">choiceValue</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="client-script">
+<h3>Client Script<a class="headerlink" href="#client-script" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Variable_Sets/index.html" class="btn btn-neutral float-right" title="Working With Variable Sets" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Time_Cards/index.html" class="btn btn-neutral" title="Time Card Modifications" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Carter.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.01',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

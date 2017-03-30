@@ -39,6 +39,8 @@ Contents:
 
    Time_Cards/index
 
+   UI_Pages/index
+
    Variable_Sets/index
 
    Workflow/index
