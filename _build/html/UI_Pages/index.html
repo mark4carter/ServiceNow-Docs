@@ -102,6 +102,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#client-script">Client Script</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-passed-parameter-in-html-field">Using a passed parameter in HTML field</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">HTML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-passed-parameter-in-the-client-field">Using a passed parameter in the Client field</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Client script</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
@@ -178,6 +186,33 @@
 <div><div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">alert</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
 <span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="using-a-passed-parameter-in-html-field">
+<h2>Using a passed parameter in HTML field<a class="headerlink" href="#using-a-passed-parameter-in-html-field" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>HTML<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">g:evaluate</span> <span class="na">var</span><span class="o">=</span><span class="s">&quot;jvar_document_array&quot;</span>
+<span class="na">expression</span><span class="o">=</span><span class="s">&quot;RP.getWindowProperties().get(&#39;sysparm_document_array&#39;)&quot;</span> <span class="p">/&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;&quot;${jvar_document_array}&quot;&#39;</span><span class="p">);</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="using-a-passed-parameter-in-the-client-field">
+<h2>Using a passed parameter in the Client field<a class="headerlink" href="#using-a-passed-parameter-in-the-client-field" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Client script<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-html"><div class="highlight"><pre><span></span>alert(&#39;&quot;${sysparm_document_array}&quot;&#39;);
 </pre></div>
 </div>
 </div></blockquote>

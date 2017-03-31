@@ -30,3 +30,31 @@ Client Script
     function myFunction(val) {
       alert(val);
     }
+
+
+Using a passed parameter in HTML field
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+HTML
+----------
+
+  .. code-block:: html
+
+    <g:evaluate var="jvar_document_array"
+    expression="RP.getWindowProperties().get('sysparm_document_array')" />
+  
+    <script>
+      alert('"${jvar_document_array}"');
+    </script>
+
+
+
+Using a passed parameter in the Client field
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Client script
+------------------
+
+  .. code-block:: html
+
+    alert('"${sysparm_document_array}"');
