@@ -37,6 +37,8 @@ Contents:
 
    Sphinx_Shortcuts/index
 
+   Syntax_Editor/index
+
    Time_Cards/index
 
    UI_Pages/index

@@ -57,4 +57,6 @@ Client script
 
   .. code-block:: html
 
-    alert('"${sysparm_document_array}"');
+    if ("${sysparm_checked_out}" == "true") {
+      alert('"${sysparm_checked_out}"');
+    }
