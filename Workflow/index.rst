@@ -29,3 +29,28 @@ Canceling and Reopening Workflow
     //Cancels all approvals for Business Case and delete workflow
     new WorkflowApprovalUtils().cancelAll(current, "Re-Opened by " + gs.getUser());
     new Workflow().deleteWorkflow(current);
+
+
+
+Sending in workflow values with StartFlow
+*********************************************
+
+.. code-block:: javascript
+
+    var wf  = new Workflow ( ); //Get the workflow id 
+    var  wfId  = wf. getWorkflowFromName ( "Print Screen" ) ; 
+    var vars = {};
+    vars.u_task_sys_id = current.sys_id.toString();
+    vars.variable2 = "This is var2";
+    wf. startFlow (wfId , current , "Update" , vars ) ;
+
+.. code-block:: javascript
+
+    var readValue = workflow.inputs.u_task_sys_id;
+    //workflow.variables_u_task_sys_id  ... will also work
+
+    var projectTaskGR = new GlideRecord("pm_project_task");
+    projectTaskGR.get("sys_id", readValue);
+    projectTaskGR.state = 3;
+    projectTaskGR.update();
+

@@ -30,7 +30,8 @@
   
 
   
-    <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/> 
+    <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
+        <link rel="prev" title="Working With Variable Sets" href="../Variable_Sets/index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -79,18 +80,29 @@
           
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Copying_Data/index.html">Copying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CORS_Error/index.html">CORS Error</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DateTime/index.html">Date Time Servicenow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Istanbul_Notes/index.html">Instanbul Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OAuth/index.html">OAuth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Sending_Attachments_via_REST/index.html">Sending Attachments via REST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Service_Portal/index.html">Service Portal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sphinx_Shortcuts/index.html">Sphinx Shortcuts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Syntax_Editor/index.html">Syntax Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UI_Pages/index.html">UI Pages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#canceling-and-reopening-workflow">Canceling and Reopening Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-in-workflow-values-with-startflow">Sending in workflow values with StartFlow</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -156,12 +168,39 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="sending-in-workflow-values-with-startflow">
+<h2>Sending in workflow values with StartFlow<a class="headerlink" href="#sending-in-workflow-values-with-startflow" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">wf</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Workflow</span> <span class="p">(</span> <span class="p">);</span> <span class="c1">//Get the workflow id</span>
+<span class="kd">var</span>  <span class="nx">wfId</span>  <span class="o">=</span> <span class="nx">wf</span><span class="p">.</span> <span class="nx">getWorkflowFromName</span> <span class="p">(</span> <span class="s2">&quot;Print Screen&quot;</span> <span class="p">)</span> <span class="p">;</span>
+<span class="kd">var</span> <span class="nx">vars</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">vars</span><span class="p">.</span><span class="nx">u_task_sys_id</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">sys_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+<span class="nx">vars</span><span class="p">.</span><span class="nx">variable2</span> <span class="o">=</span> <span class="s2">&quot;This is var2&quot;</span><span class="p">;</span>
+<span class="nx">wf</span><span class="p">.</span> <span class="nx">startFlow</span> <span class="p">(</span><span class="nx">wfId</span> <span class="p">,</span> <span class="nx">current</span> <span class="p">,</span> <span class="s2">&quot;Update&quot;</span> <span class="p">,</span> <span class="nx">vars</span> <span class="p">)</span> <span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">readValue</span> <span class="o">=</span> <span class="nx">workflow</span><span class="p">.</span><span class="nx">inputs</span><span class="p">.</span><span class="nx">u_task_sys_id</span><span class="p">;</span>
+<span class="c1">//workflow.variables_u_task_sys_id  ... will also work</span>
+
+<span class="kd">var</span> <span class="nx">projectTaskGR</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;pm_project_task&quot;</span><span class="p">);</span>
+<span class="nx">projectTaskGR</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;sys_id&quot;</span><span class="p">,</span> <span class="nx">readValue</span><span class="p">);</span>
+<span class="nx">projectTaskGR</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">projectTaskGR</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../Variable_Sets/index.html" class="btn btn-neutral" title="Working With Variable Sets" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
