@@ -170,6 +170,7 @@
 </div>
 <div class="section" id="sending-in-workflow-values-with-startflow">
 <h2>Sending in workflow values with StartFlow<a class="headerlink" href="#sending-in-workflow-values-with-startflow" title="Permalink to this headline">¶</a></h2>
+<p>UI Action / Business Rule</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">wf</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Workflow</span> <span class="p">(</span> <span class="p">);</span> <span class="c1">//Get the workflow id</span>
 <span class="kd">var</span>  <span class="nx">wfId</span>  <span class="o">=</span> <span class="nx">wf</span><span class="p">.</span> <span class="nx">getWorkflowFromName</span> <span class="p">(</span> <span class="s2">&quot;Print Screen&quot;</span> <span class="p">)</span> <span class="p">;</span>
 <span class="kd">var</span> <span class="nx">vars</span> <span class="o">=</span> <span class="p">{};</span>
@@ -178,6 +179,7 @@
 <span class="nx">wf</span><span class="p">.</span> <span class="nx">startFlow</span> <span class="p">(</span><span class="nx">wfId</span> <span class="p">,</span> <span class="nx">current</span> <span class="p">,</span> <span class="s2">&quot;Update&quot;</span> <span class="p">,</span> <span class="nx">vars</span> <span class="p">)</span> <span class="p">;</span>
 </pre></div>
 </div>
+<p>Within Workflow Script</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">readValue</span> <span class="o">=</span> <span class="nx">workflow</span><span class="p">.</span><span class="nx">inputs</span><span class="p">.</span><span class="nx">u_task_sys_id</span><span class="p">;</span>
 <span class="c1">//workflow.variables_u_task_sys_id  ... will also work</span>
 

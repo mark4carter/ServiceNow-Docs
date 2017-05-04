@@ -35,6 +35,9 @@ Canceling and Reopening Workflow
 Sending in workflow values with StartFlow
 *********************************************
 
+
+UI Action / Business Rule
+
 .. code-block:: javascript
 
     var wf  = new Workflow ( ); //Get the workflow id 
@@ -43,6 +46,9 @@ Sending in workflow values with StartFlow
     vars.u_task_sys_id = current.sys_id.toString();
     vars.variable2 = "This is var2";
     wf. startFlow (wfId , current , "Update" , vars ) ;
+
+
+Within Workflow Script
 
 .. code-block:: javascript
 
