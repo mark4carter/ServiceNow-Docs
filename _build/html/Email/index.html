@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Sphinx Shortcuts &mdash; ServiceNow Documentation 0.01 documentation</title>
+  <title>Emails &mdash; ServiceNow Documentation 0.01 documentation</title>
   
 
   
@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
-        <link rel="next" title="Syntax Editor" href="../Syntax_Editor/index.html"/>
-        <link rel="prev" title="Service Portal" href="../Service_Portal/index.html"/> 
+        <link rel="next" title="Hiding non-readable Rows in List View" href="../Hiding_non-readable_Rows/index.html"/>
+        <link rel="prev" title="Date Time Servicenow" href="../DateTime/index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -85,7 +85,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../Copying_Data/index.html">Copying Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CORS_Error/index.html">CORS Error</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DateTime/index.html">Date Time Servicenow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Email/index.html">Emails</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Emails</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parsing-out-hidden-watermarks">Parsing out Hidden Watermarks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#business-rule-on-sys-email-table">Business Rule on sys_email table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Metrics/index.html">Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../OAuth/index.html">OAuth</a></li>
@@ -93,10 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Sending_Attachments_via_REST/index.html">Sending Attachments via REST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Service_Portal/index.html">Service Portal</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Sphinx Shortcuts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#sphinx-codes">Sphinx codes</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../Sphinx_Shortcuts/index.html">Sphinx Shortcuts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Syntax_Editor/index.html">Syntax Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../UI_Pages/index.html">UI Pages</a></li>
@@ -132,11 +136,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Sphinx Shortcuts</li>
+    <li>Emails</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/Sphinx_Shortcuts/index.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Email/index.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -146,20 +150,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="sphinx-shortcuts">
-<h1>Sphinx Shortcuts<a class="headerlink" href="#sphinx-shortcuts" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="sphinx-codes">
-<h2>Sphinx codes<a class="headerlink" href="#sphinx-codes" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Javascript"><div class="highlight"><pre><span></span><span class="cm">/*</span>
-<span class="cm">.. code-block:: Javascript</span>
+  <div class="section" id="emails">
+<h1>Emails<a class="headerlink" href="#emails" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="parsing-out-hidden-watermarks">
+<h2>Parsing out Hidden Watermarks<a class="headerlink" href="#parsing-out-hidden-watermarks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="business-rule-on-sys-email-table">
+<h3>Business Rule on sys_email table<a class="headerlink" href="#business-rule-on-sys-email-table" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span> <span class="nx">executeRule</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span> <span class="cm">/*null when async*/</span><span class="p">)</span> <span class="p">{</span>
 
-<span class="cm">    var someCode = &quot;some more code&quot;</span>
+            <span class="nx">current</span><span class="p">.</span><span class="nx">subject</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">subject</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/Re:+/i</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+            <span class="nx">current</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">headers</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/In-Reply-To:&lt;[^&gt;]*&gt;/ig</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
 
-<span class="cm">    .. warning::</span>
-
-<span class="cm">            Some warning block</span>
-<span class="cm">*/</span>
+    <span class="p">})(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">);</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<p>We had a client where an email would continually be marked as a reply with a watermark,
+even after the watermark had been removed.  We found in this case, we needed to remove the
+&#8220;RE&#8221; in the subject and the &#8220;In-Reply-To&#8221; in the email header</p>
 </div>
 </div>
 </div>
@@ -171,10 +181,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Syntax_Editor/index.html" class="btn btn-neutral float-right" title="Syntax Editor" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Hiding_non-readable_Rows/index.html" class="btn btn-neutral float-right" title="Hiding non-readable Rows in List View" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../Service_Portal/index.html" class="btn btn-neutral" title="Service Portal" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../DateTime/index.html" class="btn btn-neutral" title="Date Time Servicenow" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

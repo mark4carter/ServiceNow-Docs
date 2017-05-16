@@ -10,14 +10,20 @@ Copying Data
 Worknotes
 *********************************
 
+Copying the full set of work notes to another area
+
 .. code-block:: javascript
     
+    //Gets all worknotes associated with current
     var notes = current.work_notes.getJournalEntry(-1);
-    bCase.work_notes = "Idea Task Work Notes ::\n" + notes;
+
+    var newNotes = "Copied notes ::\n" + notes;
 
 Currency Fields
 *********************************
 
+Copying old funds in current to new funds in another field
+
 .. code-block:: javascript
     
-    bCase.u_ppm_funds_other_amt = bCase.u_ppm_funds_other_amt.getReferenceCurrencyCode() + ';' + current.u_ppm_funds_other_amt.getReferenceValue();
+    bCase.new_funds = bCase.new_funds.getReferenceCurrencyCode() + ';' + current.old_funds.getReferenceValue();

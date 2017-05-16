@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/>
-        <link rel="next" title="Hiding non-readable Rows in List View" href="../Hiding_non-readable_Rows/index.html"/>
-        <link rel="prev" title="Copying Data" href="../Copying_Data/index.html"/> 
+        <link rel="next" title="Emails" href="../Email/index.html"/>
+        <link rel="prev" title="CORS Error" href="../CORS_Error/index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,22 +82,27 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../CMS/index.html">Content Management System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Copying_Data/index.html">Copying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CORS_Error/index.html">CORS Error</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Date Time Servicenow</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#update-review-date">Update Review Date</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#comparing-due-date-with-start-date">Comparing Due Date with Start Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparing-months">Comparing Months</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#comparing-dates-when-days-doesn-t-matter-untested">Comparing Dates when days doesn&#8217;t matter (untested)</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../Email/index.html">Emails</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Istanbul_Notes/index.html">Instanbul Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OAuth/index.html">OAuth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Sending_Attachments_via_REST/index.html">Sending Attachments via REST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Service_Portal/index.html">Service Portal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slack_Questions/index.html">Slack Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sphinx_Shortcuts/index.html">Sphinx Shortcuts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Syntax_Editor/index.html">Syntax Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UI_Pages/index.html">UI Pages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Workflow/index.html">Workflows</a></li>
 </ul>
@@ -192,13 +197,34 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="comparing-months">
+<h2>Comparing Months<a class="headerlink" href="#comparing-months" title="Permalink to this headline">¶</a></h2>
+<p>This code is used to find the difference between two dateTime in months</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">profileGR</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;employment_start_date&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">nowDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideDateTime</span><span class="p">().</span><span class="nx">toString</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">year1</span> <span class="o">=</span> <span class="nx">start</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">month1</span> <span class="o">=</span> <span class="nx">start</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+
+<span class="kd">var</span> <span class="nx">year2</span> <span class="o">=</span> <span class="nx">nowDate</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">month2</span> <span class="o">=</span> <span class="nx">nowDate</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">year1</span> <span class="o">==</span> <span class="nx">year2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">month2</span><span class="o">-</span><span class="nx">month1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">yearDiff</span> <span class="o">=</span> <span class="nx">year2</span> <span class="o">-</span> <span class="nx">year1</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">monthDiff</span> <span class="o">=</span> <span class="nx">month2</span> <span class="o">-</span> <span class="nx">month1</span><span class="p">;</span>
+  <span class="k">return</span>  <span class="p">(</span><span class="nx">yearDiff</span> <span class="o">*</span> <span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="nx">monthDiff</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="comparing-dates-when-days-doesn-t-matter-untested">
 <h2>Comparing Dates when days doesn&#8217;t matter (untested)<a class="headerlink" href="#comparing-dates-when-days-doesn-t-matter-untested" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>Uses a milisecond timestamp, works for either Date or Date/Time</div></blockquote>
-<p>..code-block:: javascript</p>
-<blockquote>
-<div>newDate(g_form.getValue(&#8220;expected_start&#8221;)).getTime() &gt; newDate(g_form.getValue(&#8220;due_date&#8221;)).getTime()</div></blockquote>
+<p>Uses a milisecond timestamp, works for either Date or Date/Time</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="nx">newDate</span><span class="p">(</span><span class="nx">g_form</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;expected_start&quot;</span><span class="p">)).</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nx">newDate</span><span class="p">(</span><span class="nx">g_form</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;due_date&quot;</span><span class="p">)).</span><span class="nx">getTime</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -209,10 +235,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Hiding_non-readable_Rows/index.html" class="btn btn-neutral float-right" title="Hiding non-readable Rows in List View" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Email/index.html" class="btn btn-neutral float-right" title="Emails" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../Copying_Data/index.html" class="btn btn-neutral" title="Copying Data" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../CORS_Error/index.html" class="btn btn-neutral" title="CORS Error" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

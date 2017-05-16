@@ -59,11 +59,35 @@ On Change Client Script for Due Date
       }
     }
 
+Comparing Months
+****************************************************
+
+This code is used to find the difference between two dateTime in months
+
+.. code-block:: javascript
+    
+    var start = profileGR.getValue("employment_start_date");
+    var nowDate = new GlideDateTime().toString();
+    
+    var year1 = start.split("-")[0];
+    var month1 = start.split("-")[1];
+
+    var year2 = nowDate.split("-")[0];
+    var month2 = nowDate.split("-")[1];
+    
+    if (year1 == year2) {
+      return month2-month1;
+    } else {
+      var yearDiff = year2 - year1;
+      var monthDiff = month2 - month1;
+      return  (yearDiff * 12) + monthDiff;
+    } 
+
 Comparing Dates when days doesn't matter (untested)
 ******************************************************
 
-  Uses a milisecond timestamp, works for either Date or Date/Time
+Uses a milisecond timestamp, works for either Date or Date/Time
 
-..code-block:: javascript
+.. code-block:: javascript
 
     newDate(g_form.getValue("expected_start")).getTime() > newDate(g_form.getValue("due_date")).getTime()

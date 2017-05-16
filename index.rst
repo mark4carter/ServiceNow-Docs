@@ -11,17 +11,17 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   CMS/index
-
    Copying_Data/index
 
    CORS_Error/index
 
    DateTime/index
 
+   Email/index
+
    Hiding_non-readable_Rows/index
 
-   Istanbul_Notes/index
+   Metrics/index
 
    OAuth/index
 
@@ -32,8 +32,6 @@ Contents:
    Sending_Attachments_via_REST/index
 
    Service_Portal/index
-
-   Slack_Questions/index
 
    Sphinx_Shortcuts/index
 
