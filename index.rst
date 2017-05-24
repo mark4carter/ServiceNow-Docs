@@ -23,6 +23,8 @@ Contents:
 
    Metrics/index
 
+   Modules/index
+
    OAuth/index
 
    Reference_Qualifiers/index
