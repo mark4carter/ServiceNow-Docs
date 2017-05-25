@@ -17,6 +17,7 @@ Business Rule on sys_email table
 
     (function executeRule(current, previous /*null when async*/) {
 
+    	//RegEx to find remove Re: in subject and anything after In-Reply-To:
 		current.subject = String(current.subject).replace(/Re:+/i, "");	
 		current.headers = String(current.headers).replace(/In-Reply-To:<[^>]*>/ig, "");	
 	

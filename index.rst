@@ -29,6 +29,8 @@ Contents:
 
    Reference_Qualifiers/index
 
+   RegEx/index
+
    REST_Messages/index
 
    Sending_Attachments_via_REST/index
