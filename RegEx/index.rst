@@ -38,3 +38,13 @@ The code below will find a string, store it in a table, and replace it with the 
 	});
 
 	textWithURLs = newBody;
+
+
+Example 2: replace <<EMPLOYEE>>
+=================================
+
+.. code-block:: javascript
+
+	var parsedForm = htmlForm.replace(/&lt;&lt;EMPLOYEENAME&gt;&gt;|<<EMPLOYEENAME>>/ig, employeeGR.name);
+	parsedForm = parsedForm.replace(/&lt;&lt;EMPLOYEEFIRSTNAME&gt;&gt;|<<EMPLOYEEFIRSTNAME>>/ig, employeeGR.first_name);
+	parsedForm = parsedForm.replace(/&lt;&lt;DATE&gt;&gt;|<<DATE>>/ig, gs.nowDateTime().split(" ")[0]);

@@ -19,6 +19,8 @@ Contents:
 
    Email/index
 
+   GlideAjax/index
+
    Hiding_non-readable_Rows/index
 
    Metrics/index

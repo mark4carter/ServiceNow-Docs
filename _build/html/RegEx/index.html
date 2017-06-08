@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../CORS_Error/index.html">CORS Error</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DateTime/index.html">Date Time Servicenow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Email/index.html">Emails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GlideAjax/index.html">GlideAjax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Metrics/index.html">Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Modules/index.html">Modules</a></li>
@@ -93,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">RegEx</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#replace-with-callback">Replace with callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-2-replace-employee">Example 2: replace &lt;&lt;EMPLOYEE&gt;&gt;</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
@@ -175,6 +177,14 @@ you can use a callback function</p>
     <span class="p">});</span>
 
     <span class="nx">textWithURLs</span> <span class="o">=</span> <span class="nx">newBody</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-2-replace-employee">
+<h2>Example 2: replace &lt;&lt;EMPLOYEE&gt;&gt;<a class="headerlink" href="#example-2-replace-employee" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">parsedForm</span> <span class="o">=</span> <span class="nx">htmlForm</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;lt;&amp;lt;EMPLOYEENAME&amp;gt;&amp;gt;|&lt;&lt;EMPLOYEENAME&gt;&gt;/ig</span><span class="p">,</span> <span class="nx">employeeGR</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="nx">parsedForm</span> <span class="o">=</span> <span class="nx">parsedForm</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;lt;&amp;lt;EMPLOYEEFIRSTNAME&amp;gt;&amp;gt;|&lt;&lt;EMPLOYEEFIRSTNAME&gt;&gt;/ig</span><span class="p">,</span> <span class="nx">employeeGR</span><span class="p">.</span><span class="nx">first_name</span><span class="p">);</span>
+<span class="nx">parsedForm</span> <span class="o">=</span> <span class="nx">parsedForm</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;lt;&amp;lt;DATE&amp;gt;&amp;gt;|&lt;&lt;DATE&gt;&gt;/ig</span><span class="p">,</span> <span class="nx">gs</span><span class="p">.</span><span class="nx">nowDateTime</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
