@@ -17,9 +17,13 @@ Contents:
 
    DateTime/index
 
+   Design_Resources/index
+
    Email/index
 
    GlideAjax/index
+
+   Glide_Conditionals/index
 
    Hiding_non-readable_Rows/index
 

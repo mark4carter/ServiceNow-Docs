@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Glide Conditionals &mdash; ServiceNow Documentation 0.01 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ServiceNow Documentation 0.01 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ServiceNow Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../Copying_Data/index.html">Copying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CORS_Error/index.html">CORS Error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DateTime/index.html">Date Time Servicenow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Email/index.html">Emails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GlideAjax/index.html">GlideAjax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hiding_non-readable_Rows/index.html">Hiding non-readable Rows in List View</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OAuth/index.html">OAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference_Qualifiers/index.html">Reference Qualifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RegEx/index.html">RegEx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../REST_Messages/index.html">REST Message v2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sending_Attachments_via_REST/index.html">Sending Attachments via REST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Service_Portal/index.html">Service Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sphinx_Shortcuts/index.html">Sphinx Shortcuts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Syntax_Editor/index.html">Syntax Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Time_Cards/index.html">Time Card Modifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UI_Pages/index.html">UI Pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Variable_Sets/index.html">Working With Variable Sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Workflow/index.html">Workflows</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ServiceNow Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Glide Conditionals</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Glide_Conditionals/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="glide-conditionals">
+<h1>Glide Conditionals<a class="headerlink" href="#glide-conditionals" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="matching-records-using-conditions">
+<h2>Matching records using conditions<a class="headerlink" href="#matching-records-using-conditions" title="Permalink to this headline">¶</a></h2>
+<p>The business rule below runs when a record is inserted into the table.
+It orders the approval_conditions record and checks to see if the current
+inserted record matches the condition set in the approval_condition record.</p>
+<div class="highlight-Javascript"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span> <span class="nx">executeRule</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span> <span class="cm">/*null when async*/</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">approvalConditionsGR</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlideRecord</span><span class="p">(</span><span class="s2">&quot;approval_conditions_table&quot;</span><span class="p">);</span>
+    <span class="nx">approvalConditionsGR</span><span class="p">.</span><span class="nx">orderBy</span><span class="p">(</span><span class="s1">&#39;order&#39;</span><span class="p">);</span>
+    <span class="nx">approvalConditionsGR</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="nx">approvalConditionsGR</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">GlideFilter</span><span class="p">.</span><span class="nx">checkRecord</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">approvalConditionsGR</span><span class="p">.</span><span class="nx">approval_condition</span><span class="p">)</span>  <span class="o">==</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">approver</span> <span class="o">=</span> <span class="nx">approvalConditionsGR</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;approver&quot;</span><span class="p">);</span>
+            <span class="nx">current</span><span class="p">.</span><span class="nx">approver</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">approver</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">})(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Carter.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.01',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
